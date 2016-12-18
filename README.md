@@ -8,6 +8,7 @@ React, Redux and React Router and antd in ES6 for ultra-responsive web apps
 - antd
 - ES7 Components  好处是我们在组件中定义的方法不用自己去初始化里面.bind(this)了;像这样：
 
+
 `state = {
     value: this.props.value,
     editable: false,
