@@ -27,4 +27,4 @@ React, Redux and React Router and antd in ES6 for ultra-responsive web apps
     this.setState({ editable: true });
   }
 `
-- ...
+- mock.js api
