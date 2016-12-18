@@ -9,8 +9,7 @@ module.exports =  {
   devtool: 'source-map',
   noInfo: false,
   entry: {
-    app: ['eventsource-polyfill', // necessary for hot reloading with IE
-      './src/index']
+    app: './src/index'
   },
   target: 'web',
   output: {
@@ -38,7 +37,7 @@ module.exports =  {
 
     new HtmlwebpackPlugin({
       title: 'RSS.APP',
-      filename: '/index.html', //生成的html存放路径，相对于 path
+      filename: 'index.html', //生成的html存放路径，相对于 path
       template: './assets/_layouts.ejs', //html模板路径
       inject: true, //允许插件修改哪些内容，inject: true, 包括head与body   inject: head, 只到head
       hash: true, //为静态资源生成hash值
