@@ -1,29 +1,21 @@
 import React from 'react';
 import { Table, Input, Icon, Button, Popconfirm } from 'antd';
-
 class EditableCell extends React.Component {
-  constructor(props, context) {
-    super(props, context);
-    this.state = {
-      value: this.props.value,
-      editable: false,
-    }
-    this.handleChange=this.handleChange.bind(this);
-    this.check=this.check.bind(this);
-    this.edit=this.edit.bind(this);
+  state = {
+    value: this.props.value,
+    editable: false,
   }
-
-  handleChange(e) {
+  handleChange = (e) => {
     const value = e.target.value;
     this.setState({ value });
   }
-  check () {
+  check = () => {
     this.setState({ editable: false });
     if (this.props.onChange) {
       this.props.onChange(this.state.value);
     }
   }
-  edit (){
+  edit = () => {
     this.setState({ editable: true });
   }
   render() {
@@ -31,27 +23,27 @@ class EditableCell extends React.Component {
     return (<div className="editable-cell">
       {
         editable ?
-          <div className="editable-cell-input-wrapper">
-            <Input
-              value={value}
-              onChange={this.handleChange}
-              onPressEnter={this.check}
-              />
-            <Icon
-              type="check"
-              className="editable-cell-icon-check"
-              onClick={this.check}
-              />
-          </div>
-          :
-          <div className="editable-cell-text-wrapper">
-            {value || ' '}
-            <Icon
-              type="edit"
-              className="editable-cell-icon"
-              onClick={this.edit}
-              />
-          </div>
+        <div className="editable-cell-input-wrapper">
+          <Input
+            value={value}
+            onChange={this.handleChange}
+            onPressEnter={this.check}
+          />
+          <Icon
+            type="check"
+            className="editable-cell-icon-check"
+            onClick={this.check}
+          />
+        </div>
+        :
+        <div className="editable-cell-text-wrapper">
+          {value || ' '}
+          <Icon
+            type="edit"
+            className="editable-cell-icon"
+            onClick={this.edit}
+          />
+        </div>
       }
     </div>);
   }
@@ -68,7 +60,7 @@ class EditableTable extends React.Component {
         <EditableCell
           value={text}
           onChange={this.onCellChange(index, 'name')}
-          />
+        />
       ),
     }, {
       title: 'age',
@@ -82,11 +74,11 @@ class EditableTable extends React.Component {
       render: (text, record, index) => {
         return (
           this.state.dataSource.length > 1 ?
-            (
-              <Popconfirm title="Sure to delete?" onConfirm={this.onDelete(index)}>
-                <a href="#">Delete</a>
-              </Popconfirm>
-            ) : null
+          (
+            <Popconfirm title="Sure to delete?" onConfirm={this.onDelete(index)}>
+              <a href="#">Delete</a>
+            </Popconfirm>
+          ) : null
         );
       },
     }];
@@ -105,25 +97,22 @@ class EditableTable extends React.Component {
       }],
       count: 2,
     };
-    this.onCellChange=this.onCellChange.bind(this);
-    this.onDelete=this.onDelete.bind(this);
-    this.handleAdd=this.handleAdd.bind(this);
   }
-  onCellChange (index, key)  {
+  onCellChange = (index, key) => {
     return (value) => {
       const dataSource = [...this.state.dataSource];
       dataSource[index][key] = value;
       this.setState({ dataSource });
     };
   }
-  onDelete (index)  {
+  onDelete = (index) => {
     return () => {
       const dataSource = [...this.state.dataSource];
       dataSource.splice(index, 1);
       this.setState({ dataSource });
     };
   }
-  handleAdd  ()  {
+  handleAdd = () => {
     const { count, dataSource } = this.state;
     const newData = {
       key: count,
@@ -145,5 +134,4 @@ class EditableTable extends React.Component {
     </div>);
   }
 }
-
 export default EditableTable;
